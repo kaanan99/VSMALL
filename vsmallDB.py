@@ -1,6 +1,7 @@
 import pymongo
 from bson import ObjectId
 
+localhost = 27017
 class Model(dict):
     """
     A simple model that wraps mongodb document
@@ -33,7 +34,7 @@ class Model(dict):
             return resp
 
 class User(Model): #users collection
-    db_client = pymongo.MongoClient('localhost', 27017)
+    db_client = pymongo.MongoClient('localhost', localhost)
     collection = db_client["VSMALL"]["users_list"]
 
     def find_all(self):
@@ -55,7 +56,7 @@ class User(Model): #users collection
         return users    
 
 class Item(Model): #catalog items collection
-    db_client = pymongo.MongoClient('localhost', 27017)
+    db_client = pymongo.MongoClient('localhost', localhost)
     collection = db_client["VSMALL"]["items_list"]
 
     def find_all(self):
