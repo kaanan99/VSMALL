@@ -32,9 +32,9 @@ class Model(dict):
             self.clear()
             return resp
 
-class User(Model):
+class User(Model): #users collection
     db_client = pymongo.MongoClient('localhost', 27017)
-    collection = db_client["users"]["users_list"]
+    collection = db_client["VSMALL"]["users_list"]
 
     def find_all(self):
         users = list(self.collection.find())
@@ -54,3 +54,48 @@ class User(Model):
             user["_id"] = str(user["_id"])
         return users    
 
+class Item(Model): #catalog items collection
+    db_client = pymongo.MongoClient('localhost', 27017)
+    collection = db_client["VSMALL"]["items_list"]
+
+    def find_all(self):
+        items = list(self.collection.find())
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
+    def find_by_brand(self, brand):
+        items = list(self.collection.find({"brand": brand}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
+    def find_by_type(self, type):
+        items = list(self.collection.find({"type": type}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
+    def find_by_sale(self, sale):
+        items = list(self.collection.find({"sale": sale}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+        
+    def find_by_brand_type(self, brand, type):
+        items = list(self.collection.find({"brand": brand, "type": type}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
+    def find_by_brand_sale(self, brand, sale):
+        items = list(self.collection.find({"brand": brand, "sale": sale}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
+    def find_by_brand_sale_type(self, brand, sale, type):
+        items = list(self.collection.find({"brand": brand, "sale": type, "type": type}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
