@@ -2,46 +2,12 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-import random
-import string
 from model_mongodb import User, Item
-
 
 app = Flask(__name__)
 
 #CORS stands for Cross Origin Requests.
 CORS(app) #Here we'll allow requests coming from any domain. Not recommended for production environment.
-
-users = { 
-    'users_list' :
-    [
-        {  
-            'id' : 'xyz789',
-            'name' : 'Charlie',
-            'job': 'Janitor',
-        },
-        {
-            'id' : 'abc123',            
-            'name': 'Mac',
-            'job': 'Bouncer',
-        },
-        {
-            'id' : 'ppp222',            
-            'name': 'Mac',
-            'job': 'Professor',
-        },        
-        {
-            'id' : 'yat999',            
-            'name': 'Dee',
-            'job': 'Aspring actress',
-        },
-        {
-             'id' : 'zap555',           
-            'name': 'Dennis',
-            'job': 'Bartender',
-        }
-    ]
-}
 
 @app.route('/')
 def hello_world():
