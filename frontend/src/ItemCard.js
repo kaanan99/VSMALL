@@ -1,6 +1,20 @@
 import React from 'react';
 
-export default function ItemCard(props){
-    const {value} = props;
-    
+class ItemCard extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return(
+            <button className = 'ItemCard' onClick={this.handleClick()}>
+                {props.image}
+                {props.name}
+                {props.price}
+            </button>
+        );
+    }
+    handleClick(){
+        window.location.assign(this.props.link)
+    }
 }
+
