@@ -13,7 +13,16 @@ CORS(app) #Here we'll allow requests coming from any domain. Not recommended for
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/users', methods=['GET', 'POST'])
+@app.route('/catalouge', methods=['GET', 'POST'])
+def view_catalouge():
+    if request.method == 'POST':
+        userToAdd = request.get_json()
+        newUser = User(userToAdd)
+        newUser.save() 
+        resp = jsonify(newUser), 201
+        return resp
+
+'''@app.route('/users', methods=['GET', 'POST'])
 def get_users():
     if request.method == 'GET':
         search_username = request.args.get('name')
@@ -57,4 +66,4 @@ def find_users_by_name_job(name, job):
     for user in users['users_list']:
         if user['name'] == name and user['job'] == job:
             subdict['users_list'].append(user)
-    return subdict  
+    return subdict'''
