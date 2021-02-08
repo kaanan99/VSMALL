@@ -15,7 +15,9 @@ def hello_world():
 
 @app.route('/catalouge', methods=['GET', 'POST'])
 def view_catalouge():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        
+    elif request.method == 'POST':
         userToAdd = request.get_json()
         newUser = User(userToAdd)
         newUser.save() 
