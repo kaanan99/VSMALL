@@ -6,15 +6,16 @@ class ItemCard extends React.Component {
     }
     render(){
         return(
-            <button className = 'ItemCard' onClick={this.handleClick()}>
-                {props.image}
-                {props.name}
-                {props.price}
-            </button>
+            <div className = 'ItemCard' onClick={this.handleClick()}>
+                <img src={this.props.image} alt={this.props.name}></img>
+                <h4>{this.props.name}</h4>
+                <p>{this.props.price}</p>    
+            </div>
         );
     }
+
     handleClick(){
-        window.location.assign(this.props.link)
+        window.location.assign(this.props.image)
     }
 }
 
