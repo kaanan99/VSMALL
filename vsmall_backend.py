@@ -22,10 +22,11 @@ def webscrape():
 def helloWorld():
    return "Hello World"
 
-@app.route('/catalouge', methods=['GET', 'POST'])
-def view_catalouge():
+@app.route('/catalog', methods=['GET', 'POST'])
+def view_catalog():
     if request.method == 'GET':
-       print("In get") 
+        result = Item().find_all()
+        return {"items_list": result}
     elif request.method == 'POST':
         userToAdd = request.get_json()
         newUser = User(userToAdd)
