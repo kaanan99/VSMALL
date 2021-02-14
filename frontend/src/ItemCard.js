@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class ItemCard extends React.Component {
+class ItemCard extends Component {
     constructor(props){
         super(props);
     }
     render(){
         return(
             <div className = 'ItemCard' onClick={this.handleClick()}>
-                <img src={this.props.image} alt={this.props.name}></img>
+                <img src={this.props.image} alt={this.props.name} width="100%"></img>
                 <h4>{this.props.name}</h4>
                 <p>{this.props.price}</p>    
             </div>
@@ -19,3 +19,4 @@ class ItemCard extends React.Component {
     }
 }
 
+export default ItemCard;
