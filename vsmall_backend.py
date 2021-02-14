@@ -2,21 +2,30 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-from model_mongodb import User, Item
+from vsmallDB import User, Item
+from webScraping import *
 
 app = Flask(__name__)
 
 #CORS stands for Cross Origin Requests.
 CORS(app) #Here we'll allow requests coming from any domain. Not recommended for production environment.
 
+@app.before_first_request
+def webscrape():
+   clothes = scrapeHollister('https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
+   for c in clothes:
+      json = {"name":c.name, "price":c.price, "image":c.image, "sale":c.sale, "brand":c.brand, "link":c.link}
+      newUser = Item(json)
+      newUser.save()
+
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def helloWorld():
+   return "Hello World"
 
 @app.route('/catalouge', methods=['GET', 'POST'])
 def view_catalouge():
     if request.method == 'GET':
-        
+       print("In get") 
     elif request.method == 'POST':
         userToAdd = request.get_json()
         newUser = User(userToAdd)

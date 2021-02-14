@@ -11,6 +11,7 @@ class Model(dict):
     __setattr__ = dict.__setitem__
 
     def save(self):
+        print(self.id)
         if not self._id:
             self.collection.insert(self)
         else:
