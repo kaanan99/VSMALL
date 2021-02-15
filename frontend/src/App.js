@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import Catalog from './Catalog';
+import axios from 'axios';
 
 class App extends Component {
-  items_list = {
-    items: []
-  };
-  
-  componentDidMount() {
+  state = {
+    items:[]
+  }
+  componentDidMount(){
     axios.get('http://localhost:5000/catalog')
-     .then(res => {
-       const items = res.data.items_list;
-       this.items_list({ items });
-     })
-     .catch(function (error) {
-       //Not handling the error. Just logging into the console.
-       console.log(error);
-     });
- }
+    .then(res => {
+      const items = res.data.items_list;
+      this.setState({ items });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+   }
 
   render() {
+    const { items } = this.state; 
     return (
       <div className="container">
-        <Catalog items_list={this.items_list}/>
+        <Catalog items_list={items}/>
       </div>
     );
   }

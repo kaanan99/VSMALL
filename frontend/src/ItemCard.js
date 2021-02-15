@@ -15,7 +15,7 @@ class ItemCard extends Component {
     }
 
     handleClick(){
-        window.location.assign(this.props.image)
+        window.location.assign(this.props.link)
     }
 }
 

@@ -19,7 +19,7 @@ def scrapeHollister(link, admin):
    tree = html.fromstring(pageContent.content)
    name = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[3]/div[1]/a/text()')
    price = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[3]/div[3]/div[1]/div/span/span[2]/span[@data-state = "" or @data-state = "discount"]/text()')
-   image = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[2]/div[1]/a/img/@data-src')
+   image = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[2]/div[1]/a/img/@src')
    sale = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[3]/div[3]/div[1]/div/span/span[2]/span[@data-state = "" or @data-state = "discount"]/@data-state')
    link = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[2]/div[1]/a/@href')
    for x in range(len(name)):
