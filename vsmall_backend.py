@@ -15,8 +15,8 @@ def webscrape():
    clothes = scrapeHollister('https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
    for c in clothes:
       json = {"name":c.name, "price":c.price, "image":c.image, "sale":c.sale, "brand":c.brand, "link":c.link}
-      newUser = Item(json)
-      newUser.save()
+      newItem = Item(json)
+      newItem.save()
 
 @app.route('/')
 def helloWorld():
@@ -28,10 +28,10 @@ def view_catalog():
         result = Item().find_all()
         return {"items_list": result}
     elif request.method == 'POST':
-        userToAdd = request.get_json()
-        newUser = User(userToAdd)
-        newUser.save() 
-        resp = jsonify(newUser), 201
+        itemToAdd = request.get_json()
+        newItem = User(itemToAdd)
+        newItem.save() 
+        resp = jsonify(newItem), 201
         return resp
 
 '''@app.route('/users', methods=['GET', 'POST'])
