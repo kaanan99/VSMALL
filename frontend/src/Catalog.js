@@ -16,7 +16,9 @@ class Catalog extends Component {
                 <Col 
                   xs={{ span: 6 }} sm={{ span: 4 }} 
                   md={{ span: 3 }} lg={{ span: 2 }}
-                ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/></Col>
+                ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/>
+                <button name="WishList">Add to WishList</button></Col>
+                
               )}
             </Row>
           </div>  
