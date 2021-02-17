@@ -26,6 +26,7 @@ def scrapeHollister(link, admin):
    link = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[2]/div[1]/a/@href')
    for x in range(len(name)):
       new_image = image[x].replace("imageType", "prod1")
-      clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, sale[x], "https://www.hollisterco.com" + link[x]))
+      new_sale = sale[x].replace("discount", "Sale")
+      clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, new_sale, "https://www.hollisterco.com" + link[x]))
    return clothes
 
