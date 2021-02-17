@@ -14,9 +14,9 @@ class Catalog extends Component {
             <Row gutter={40}>
               {(this.props.items_list).map(item => 
                 <Col 
-                  xs={{ span: 6 }} sm={{ span: 4 }} md={{ span: 3 }}
-                  lg={{ span: 2 }} xl={{ span: 1 }}
-                ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link}/></Col>
+                  xs={{ span: 6 }} sm={{ span: 4 }} 
+                  md={{ span: 3 }} lg={{ span: 2 }}
+                ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/></Col>
               )}
             </Row>
           </div>  
