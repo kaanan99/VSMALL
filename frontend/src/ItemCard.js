@@ -6,7 +6,7 @@ class ItemCard extends Component {
     }
     render(){
         return(
-            <div className = 'ItemCard' onClick={this.handleClick()}>
+            <div className = 'ItemCard' onClick={() => this.handleClick()}>
                 <img src={this.props.image} alt={this.props.name} width="100%"></img>
                 <h4>{this.props.name}</h4>
                 <p>{this.props.price}</p>    
@@ -15,7 +15,7 @@ class ItemCard extends Component {
     }
 
     handleClick(){
-        window.location.assign(this.props.link)
+        window.open(this.props.link)
     }
 }
 

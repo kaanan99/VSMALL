@@ -9,13 +9,14 @@ class Catalog extends Component {
     }
     render(){
         return(
-          <div className="Catalog">  
+          <div className="Catalog">
+            <h2>Welcome to VSMall</h2>  
             <Row gutter={40}>
               {(this.props.items_list).map(item => 
                 <Col 
                   xs={{ span: 6 }} sm={{ span: 4 }} md={{ span: 3 }}
                   lg={{ span: 2 }} xl={{ span: 1 }}
-                ><ItemCard image={item.image} name={item.name} price={item.price}/></Col>
+                ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link}/></Col>
               )}
             </Row>
           </div>  
