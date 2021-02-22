@@ -9,7 +9,8 @@ jobs:
       python: 3.8
       install: pip install -r requirements.txt
       script:
-      - python -c *_tests.py
+      - cd frontend
+      - python -c "print('Hi from Python!')"
 
     - language: node_js
       node_js: 12
