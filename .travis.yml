@@ -13,6 +13,7 @@ jobs:
 
     - language: node_js
       node_js: 12
+      install: npm install
       script:
       - cd frontend/src
       - npm test
