@@ -1,6 +1,5 @@
 from lxml import html
 import requests
-import re
 from flask import jsonify
 class Cloth:
    def __init__(self, brand, name, price, image, sale, link):
