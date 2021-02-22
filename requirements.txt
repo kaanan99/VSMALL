@@ -1,0 +1,7 @@
+lxml
+re
+requests
+flask
+flask_cors
+pymongo
+pytest
