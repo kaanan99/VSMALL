@@ -14,7 +14,7 @@ jobs:
     - language: node_js
       node_js: 12
       script:
+      - cd frontend
       - npm install
-      - cd frontend/src
       - npm test
       - node -e "console.log('Hi from NodeJS!')"
