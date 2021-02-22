@@ -9,10 +9,11 @@ jobs:
       python: 3.8
       install: pip install -r requirements.txt
       script:
-      - cd frontend
       - python -c "print('Hi from Python!')"
 
     - language: node_js
       node_js: 12
       script:
+      - cd frontend/src
+      - npm test
       - node -e "console.log('Hi from NodeJS!')"

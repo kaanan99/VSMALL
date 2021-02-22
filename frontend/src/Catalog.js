@@ -12,13 +12,14 @@ class Catalog extends Component {
           <div className="Catalog">
             <h2>Welcome to VSMall</h2>  
             <Row gutter={40}>
-              {(this.props.items_list).map(item => 
+              {
+              (this.props.items_list).map(item => 
                 <Col 
                   xs={{ span: 6 }} sm={{ span: 4 }} 
                   md={{ span: 3 }} lg={{ span: 2 }}
                 ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/>
                 <button name="WishList">Add to WishList</button></Col>
-                
+      
               )}
             </Row>
           </div>  
