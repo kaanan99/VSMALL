@@ -1,6 +1,5 @@
 from lxml import html
 import requests
-import re
 from flask import jsonify
 class Cloth:
    def __init__(self, brand, name, price, image, sale, link):
@@ -28,5 +27,6 @@ def scrapeHollister(link, admin):
       new_image = image[x].replace("imageType", "prod1")
       new_sale = sale[x].replace("discount", "Sale")
       clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, new_sale, "https://www.hollisterco.com" + link[x]))
+   print("Function Done")
    return clothes
 
