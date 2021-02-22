@@ -17,4 +17,3 @@ jobs:
       - cd frontend
       - npm install
       - npm test
-      - node -e "console.log('Hi from NodeJS!')"
