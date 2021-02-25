@@ -7,20 +7,27 @@ from webScraping import *
 
 app = Flask(__name__)
 
-#CORS stands for Cross Origin Requests.
-CORS(app) #Here we'll allow requests coming from any domain. Not recommended for production environment.
+# CORS stands for Cross Origin Requests.
+CORS(app)
+# Here we'll allow requests coming from any domain.
+# Not recommended for production environment.
+
 
 @app.before_first_request
 def webscrape():
-   clothes = scrapeHollister('https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
-   for c in clothes:
-      json = {"name":c.name, "price":c.price, "image":c.image, "sale":c.sale, "brand":c.brand, "link":c.link}
-      newItem = Item(json)
-      newItem.save()
+    clothes = scrapeHollister(
+        'https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
+    for c in clothes:
+        json = {"name": c.name, "price": c.price, "image": c.image,
+                "sale": c.sale, "brand": c.brand, "link": c.link}
+        newItem = Item(json)
+        newItem.save()
+
 
 @app.route('/')
 def helloWorld():
-   return "Hello World"
+    return "Hello World"
+
 
 @app.route('/catalog', methods=['GET', 'POST'])
 def view_catalog():
@@ -30,9 +37,10 @@ def view_catalog():
     elif request.method == 'POST':
         itemToAdd = request.get_json()
         newItem = User(itemToAdd)
-        newItem.save() 
+        newItem.save()
         resp = jsonify(newItem), 201
         return resp
+
 
 '''@app.route('/users', methods=['GET', 'POST'])
 def get_users():
