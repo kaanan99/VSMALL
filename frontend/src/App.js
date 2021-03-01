@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Catalog from './Catalog'
+import Login from './components/Login';
+import Logout from './components/Logout';
 import axios from 'axios'
 
 class App extends Component {
@@ -22,6 +24,9 @@ class App extends Component {
     const { items } = this.state
     return (
       <div className="container">
+        <Login />
+        <br />
+        <Logout />
         <Catalog items_list={items}/>
       </div>
     )
