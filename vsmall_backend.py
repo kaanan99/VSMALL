@@ -32,7 +32,25 @@ def helloWorld():
 @app.route('/catalog', methods=['GET', 'POST'])
 def view_catalog():
     if request.method == 'GET':
-        result = Item().find_all()
+        search_brand = request.args.get('brand')
+        search_type = request.args.get('type')
+        search_sale = request.args.get('sale')
+        if search_brand and search_type and search_sale:
+            result = Item().find_by_brand_sale_type(search_brand, search_sale, search_type)
+        elif search_brand and search_type:
+            result = Item().find_by_brand_type(search_brand, search_type)
+        elif search_brand and search_sale:
+            result = Item().find_by_brand_sale(search_brand, search_sale)
+        elif search_sale and search_type:
+            result = Item().find_by_sale_type(search_sale, search_type)
+        elif search_brand:
+            result = Item().find_by_brand(search_brand)
+        elif search_sale:
+            result = Item().find_by_sale(search_sale)
+        elif search_type:
+            result = Item().find_by_type(search_type)
+        else:
+            result = Item().find_all()
         return {"items_list": result}
     elif request.method == 'POST':
         itemToAdd = request.get_json()
