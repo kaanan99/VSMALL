@@ -10,7 +10,7 @@ function Login () {
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj)
     alert(
-      `Logged in successfully welcome ${res.profileObj.name} 😍. \n.`
+      `Logged in successfully welcome ${res.profileObj.name} 😍.`
     )
     refreshTokenSetup(res)
   }
@@ -26,7 +26,7 @@ function Login () {
     <div>
       <GoogleLogin
         clientId={clientId}
-        buttonText="Login"
+        buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}

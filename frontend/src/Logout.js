@@ -14,7 +14,7 @@ function Logout () {
     <div>
       <GoogleLogout
         clientId={clientId}
-        buttonText="Logout"
+        buttonText="Logout of VSMall"
         onLogoutSuccess={onSuccess}
       ></GoogleLogout>
     </div>
