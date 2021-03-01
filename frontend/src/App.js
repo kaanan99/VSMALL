@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Catalog from './Catalog'
-import Login from './Login';
-import Logout from './Logout';
+import Login from './Login'
+import Logout from './Logout'
 import axios from 'axios'
 
 class App extends Component {
