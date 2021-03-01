@@ -1,26 +1,26 @@
-import React from 'react';
-import { GoogleLogin } from 'react-google-login';
+import React from 'react'
+import { GoogleLogin } from 'react-google-login'
 // refresh token
-import { refreshTokenSetup } from './refreshToken';
+import { refreshTokenSetup } from './refreshToken'
 
 const clientId =
-  '520029899680-bvjdfsre1gm3jg1b5qdfiii11a1bp5il.apps.googleusercontent.com';
+  '520029899680-bvjdfsre1gm3jg1b5qdfiii11a1bp5il.apps.googleusercontent.com'
 
-function Login() {
+function Login () {
   const onSuccess = (res) => {
-    console.log('Login Success: currentUser:', res.profileObj);
+    console.log('Login Success: currentUser:', res.profileObj)
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍. \n.`
-    );
-    refreshTokenSetup(res);
-  };
+    )
+    refreshTokenSetup(res)
+  }
 
   const onFailure = (res) => {
-    console.log('Login failed: res:', res);
+    console.log('Login failed: res:', res)
     alert(
-      `Failed to login. 😢`
-    );
-  };
+      'Failed to login. 😢'
+    )
+  }
 
   return (
     <div>
@@ -34,7 +34,7 @@ function Login() {
         isSignedIn={true}
       />
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
