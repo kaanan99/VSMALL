@@ -100,6 +100,12 @@ class Item(Model):  # catalog items collection
             item["_id"] = str(item["_id"])
         return items
 
+    def find_by_sale_type(self, sale, type):
+        items = list(self.collection.find({"sale": sale, "type": type}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
     def find_by_brand_sale_type(self, brand, sale, type):
         items = list
         (self.collection.find({"brand": brand, "sale": type, "type": type}))
