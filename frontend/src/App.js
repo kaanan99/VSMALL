@@ -24,9 +24,8 @@ class App extends Component {
     const { items } = this.state
     return (
       <div className="container">
-        <Login />
-        <br />
-        <Logout />
+        <h2 align='center'>Welcome to VSMall</h2>
+        <h2 align='center'><Login /> <Logout /></h2>
         <Catalog items_list={items}/>
       </div>
     )

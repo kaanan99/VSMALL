@@ -14,7 +14,6 @@ class Catalog extends Component {
   render () {
     return (
         <div className="Catalog">
-          <h2>Welcome to VSMall</h2>
           <Row gutter={40}>
             {
             (this.props.items_list).map(item =>
