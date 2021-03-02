@@ -6,9 +6,10 @@ import axios from 'axios'
 
 class App extends Component {
   state = {
-    items: []
+    items: [],
+    isSignedIn: false
   }
-
+  
   componentDidMount () {
     axios.get('http://localhost:5000/catalog')
       .then(res => {
@@ -20,15 +21,22 @@ class App extends Component {
       })
   }
 
+  loginStateHandler(loginState){
+    if (loginState !== this.state.isSignedIn){
+      this.setState({isSignedIn: loginState})
+    }
+  }
+
   render () {
-    const { items } = this.state
+    console.log(this.state.isSignedIn)
+    const { items, isSignedIn } = this.state
     return (
       <div className="container">
         <h2 align='center'>Welcome to VSMall</h2>
-        <h2 align='center'><Login /> <Logout /></h2>
+        <h2 align='center'>{isSignedIn ? <Logout loginStateHandler={this.loginStateHandler}/> : <Login loginStateHandler={this.loginStateHandler}/>}</h2>
         <Catalog items_list={items}/>
       </div>
-    )
+    )    
   }
 }
 
