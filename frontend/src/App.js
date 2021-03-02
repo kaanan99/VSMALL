@@ -9,6 +9,7 @@ import Catalog from './Catalog'
 import Login from './Login'
 import Logout from './Logout'
 import axios from 'axios'
+import WishList from './WishList'
 
 class App extends Component {
   render () {
@@ -18,13 +19,13 @@ class App extends Component {
           <nav>
             <ul>
               <li>
-                <Link to="/">HomePage</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/catalog">CatalogPage</Link>
+                <Link to="/catalog">VSMall Catalog</Link>
               </li>
               <li>
-                <Link to="/wishlist">WishListPage</Link>
+                <Link to="/wishlist">Your WishList</Link>
               </li>
             </ul>
           </nav>
@@ -91,9 +92,27 @@ class CatalogPage extends Component  {
   }
 }
 class WishListPage extends Component  {
+  state = {
+    items: []
+  }
+  
+  componentDidMount () {
+    axios.get('http://localhost:5000/catalog')
+      .then(res => {
+        const items = res.data.items_list
+        this.setState({ items })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
   render () {
+    const {items} = this.state
     return (
-      <h2>WishList</h2>
+      <div className="container">
+        <WishList items_list={items}/>
+      </div>
     )    
   }
 }
