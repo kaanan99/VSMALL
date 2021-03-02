@@ -1,10 +1,62 @@
 import React, { Component } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
 import Catalog from './Catalog'
 import Login from './Login'
 import Logout from './Logout'
 import axios from 'axios'
 
 class App extends Component {
+  render () {
+    return (
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">HomePage</Link>
+              </li>
+              <li>
+                <Link to="/catalog">CatalogPage</Link>
+              </li>
+              <li>
+                <Link to="/wishlist">WishListPage</Link>
+              </li>
+            </ul>
+          </nav>
+  
+          {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/catalog">
+              <CatalogPage />
+            </Route>
+            <Route path="/wishlist">
+              <WishListPage />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );    
+  }
+}
+export default App
+class HomePage extends Component {
+  render () {
+    return (
+      <h2>VSMall</h2>
+    )    
+  }
+}
+
+class CatalogPage extends Component  {
   state = {
     items: [],
     isSignedIn: false
@@ -26,7 +78,6 @@ class App extends Component {
       this.setState({isSignedIn: loginState})
     }
   }
-
   render () {
     console.log(this.state.isSignedIn)
     const { items, isSignedIn } = this.state
@@ -39,5 +90,10 @@ class App extends Component {
     )    
   }
 }
-
-export default App
+class WishListPage extends Component  {
+  render () {
+    return (
+      <h2>WishList</h2>
+    )    
+  }
+}
