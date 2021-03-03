@@ -140,7 +140,7 @@ class WishListPage extends Component  {
     return (
       <div className="container">
         <h2 align='center'>{this.props.whichtodisplay()}</h2>
-        <WishList items_list={items} isSignedIn={this.props.isSignedIn}/>
+        <WishList />
       </div>
     )    
   }
