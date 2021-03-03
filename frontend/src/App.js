@@ -106,6 +106,13 @@ class CatalogPage extends Component  {
   }
 }
 class WishListPage extends Component  {
+  static get propTypes () {
+    return {
+      isSignedIn: PropTypes.any,
+      user: PropTypes.any
+    }
+  }
+  
   state = {
     wishList: []
   }
@@ -137,7 +144,7 @@ class WishListPage extends Component  {
   }
 
   render () {
-    const {items} = this.state
+    //const {items} = this.state
     return (
       <div className="container">
         <WishList wishList={this.state.wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>

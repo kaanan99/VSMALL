@@ -9,7 +9,8 @@ class WishList extends Component {
   static get propTypes () {
     return {
       isSignedIn: PropTypes.any,
-      user: PropTypes.any
+      user: PropTypes.any,
+      wishList: PropTypes.any
     }
   }
   state = {wishList: this.props.wishList}
@@ -22,7 +23,7 @@ class WishList extends Component {
     if(this.props.isSignedIn){
       return (
           <div className="WishList">
-            <h2 align='center'>{this.props.user.name}'s WishList</h2>
+            <h2 align='center'>{this.props.user.name}s WishList</h2>
             <Row gutter={40}>
               {
               (wishList).map(item =>

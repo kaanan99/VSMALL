@@ -9,7 +9,8 @@ import WishListButton from './WishListButton'
 class Catalog extends Component {
   static get propTypes () {
     return {
-      isSignedIn: PropTypes.any
+      isSignedIn: PropTypes.any,
+      user: PropTypes.any
     }
   }
   state = {items_list: []}
@@ -29,6 +30,7 @@ class Catalog extends Component {
     axios.get('http://localhost:5000/catalog')
       .then(res => {
         const items = res.data.items_list
+        this.setState({ items_list : [] })
         this.setState({ items_list: items })
       })
       .catch(function (error) {
@@ -37,9 +39,34 @@ class Catalog extends Component {
   }
 
   filterBySale () {
-    axios.get('http://localhost:5000/catalog?sale=Sale')
+    axios.get('http://localhost:5000/catalog?sale=discount')
       .then(res => {
         const items = res.data.items_list
+        this.setState({ items_list : [] })
+        this.setState({ items_list : items })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  filterByUniqlo () {
+    axios.get('http://localhost:5000/catalog?brand=Uniqlo')
+      .then(res => {
+        const items = res.data.items_list
+        this.setState({ items_list : [] })
+        this.setState({ items_list : items })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  filterByHollister () {
+    axios.get('http://localhost:5000/catalog?brand=Hollister')
+      .then(res => {
+        const items = res.data.items_list
+        this.setState({ items_list : [] })
         this.setState({ items_list : items })
       })
       .catch(function (error) {
@@ -55,6 +82,8 @@ class Catalog extends Component {
         <div className="Catalog">
           <button name="ShowAll" onClick={() => this.showAll()}>Show All</button>
           <button name="FilterbySale" onClick={() => this.filterBySale()}>Sale</button>
+          <button name="FilterbyUniqlo" onClick={() => this.filterByUniqlo()}>Uniqlo</button>
+          <button name="FilterbyHollister" onClick={() => this.filterByHollister()}>Hollister</button>
           <Row gutter={40}>
             {
             items_list.map(item =>
