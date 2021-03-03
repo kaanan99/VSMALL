@@ -18,7 +18,7 @@ class Login extends Component {
       `Logged in successfully welcome ${res.profileObj.name} 😍.`
     )
     refreshTokenSetup(res)
-    //this.props.loginStateHandler(true)
+    this.props.loginStateHandler(true, res.profileObj)
   }
 
   onFailure = (res) => {
@@ -26,7 +26,7 @@ class Login extends Component {
     alert(
       'Failed to login. 😢'
     )
-    //this.props.loginStateHandler(false)
+    this.props.loginStateHandler(false, null)
   }
 
   render () {

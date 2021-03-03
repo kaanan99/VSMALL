@@ -10,8 +10,34 @@ import Login from './Login'
 import Logout from './Logout'
 import axios from 'axios'
 import WishList from './WishList'
+import PropTypes from 'prop-types'
 
 class App extends Component {
+  state = {
+    isSignedIn: false,
+    currentUser: null,
+  }
+
+  loginStateHandler = (status, cu) => {
+    const { isSignedIn, currentUser } = this.state
+    if (status !== isSignedIn){
+      this.setState({
+        isSignedIn: status,
+        currentUser: cu,
+      })
+    }
+  }
+
+  whichtodisplay = () => {
+    const { isSignedIn, currentUser } = this.state
+    if (isSignedIn){
+      return <Logout loginStateHandler={this.loginStateHandler}/>
+    }
+    else{
+      return <Login loginStateHandler={this.loginStateHandler}/>
+    }
+  }
+
   render () {
     return (
       <Router>
@@ -34,7 +60,7 @@ class App extends Component {
               renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/catalog">
-              <CatalogPage />
+              <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay}/>
             </Route>
             <Route path="/wishlist">
               <WishListPage />
@@ -52,15 +78,21 @@ export default App
 class HomePage extends Component {
   render () {
     return (
-      <h2>VSMall</h2>
+      <h2 align='center'>Welcome To VSMall</h2>
     )    
   }
 }
 
 class CatalogPage extends Component  {
+  static get propTypes () {
+    return {
+      loginStateHandler: PropTypes.any,
+      whichtodisplay: PropTypes.any
+    }
+  }
+
   state = {
-    items: [],
-    isSignedIn: false
+    items: []
   }
   
   componentDidMount () {
@@ -74,18 +106,12 @@ class CatalogPage extends Component  {
       })
   }
 
-  loginStateHandler(loginState){
-    if (loginState !== this.state.isSignedIn){
-      this.setState({isSignedIn: loginState})
-    }
-  }
   render () {
-    console.log(this.state.isSignedIn)
-    const { items, isSignedIn } = this.state
+    const { items } = this.state
     return (
       <div className="container">
         <h2 align='center'>Welcome to VSMall</h2>
-        <h2 align='center'>{isSignedIn ? <Logout loginStateHandler={this.loginStateHandler}/> : <Login loginStateHandler={this.loginStateHandler}/>}</h2>
+        <h2 align='center'>{this.props.whichtodisplay()}</h2>
         <Catalog items_list={items}/>
       </div>
     )    

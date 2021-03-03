@@ -10,14 +10,16 @@ class WishList extends Component {
       items_list: PropTypes.any
     }
   }
+  state = {items_list: this.props.items_list}
 
   render () {
+    const { items_list } = this.state
     return (
         <div className="WishList">
           <h2 align='center'>Name's WishList</h2>
           <Row gutter={40}>
             {
-            (this.props.items_list).map(item =>
+            (items_list).map(item =>
               <Col
                 key = {item.name}
                 xs={{ span: 6 }} sm={{ span: 4 }}
