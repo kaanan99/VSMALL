@@ -9,6 +9,7 @@ class WishList extends Component {
   static get propTypes () {
     return {
       isSignedIn: PropTypes.any,
+      items_list: PropTypes.any,
       user: PropTypes.any
     }
   }

@@ -80,6 +80,12 @@ class Item(Model):  # catalog items collection
         for item in items:
             item["_id"] = str(item["_id"])
         return items
+        
+    def find_by_link(self, link):
+        items = list(self.collection.find({"link": link}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
 
     def find_by_brand_type(self, brand, type):
         items = list(self.collection.find({"brand": brand, "type": type}))

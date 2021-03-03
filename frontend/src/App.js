@@ -111,30 +111,21 @@ class WishListPage extends Component  {
   }
 
   
-  // componentDidMount () {
-  //   if(this.props.isSignedIn){
-  //     axios.get('localhost:5000/wishlist/' + this.props.user.email)
-  //       .then(res => {
-  //         const items = res.data.wishlist
-  //         this.setState({ wishList : items})
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error)
-  //       })
-  //   } else {
-  //     alert('Sign in to use this feature')
-  //   }
-  // }
   componentDidMount () {
-    axios.get('http://localhost:5000/catalog')
-      .then(res => {
-        const items = res.data.items_list
-        this.setState({ wishList : items})
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    if(this.props.isSignedIn){
+      axios.get('localhost:5000/wishlist/' + this.props.user.email)
+        .then(res => {
+          const items = res.data.wishlist
+          this.setState({ wishList : items})
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    } else {
+      alert('Sign in to use this feature')
+    }
   }
+
 
   render () {
     const {items} = this.state

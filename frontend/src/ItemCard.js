@@ -16,7 +16,7 @@ class ItemCard extends Component {
     return (
             <div className = 'ItemCard' onClick={() => this.handleClick()}>
                 <img src={this.props.image} alt={this.props.name} width="100%"></img>
-                <h4>{this.props.name}</h4>
+                <h4 align="center">{this.props.name}</h4>
                 <p>{this.props.sale} {this.props.price}</p>
             </div>
     )

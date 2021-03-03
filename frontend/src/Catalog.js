@@ -26,6 +26,7 @@ class Catalog extends Component {
   }
 
   showAll () {
+    console.log("Reverting")
     axios.get('http://localhost:5000/catalog')
       .then(res => {
         const items = res.data.items_list
@@ -37,7 +38,8 @@ class Catalog extends Component {
   }
 
   filterBySale () {
-    axios.get('http://localhost:5000/catalog?sale=Sale')
+    console.log("Filtering")
+    axios.get('http://localhost:5000/catalog?sale=discount')
       .then(res => {
         const items = res.data.items_list
         this.setState({ items_list : items })
@@ -49,6 +51,7 @@ class Catalog extends Component {
 
   render () {
     const {items_list} = this.state
+    console.log(items_list)
     // alert('Catalog')
     // alert(this.props.user)
     return (
@@ -66,7 +69,10 @@ class Catalog extends Component {
               <WishListButton isSignedIn = { this.props.isSignedIn } user={ this.props.user} item={item}></WishListButton></Col>
             )}
            </Row>
+           {console.log("After")}
+           {console.log(items_list)}
         </div>
+        
     )
   }
 }

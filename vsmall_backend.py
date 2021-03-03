@@ -22,7 +22,8 @@ def webscrape():
         json = {"name": c.name, "price": c.price, "image": c.image,
                 "sale": c.sale, "brand": c.brand, "link": c.link}
         newItem = Item(json)
-        newItem.save()
+        if len(Item().find_by_link(c.link)) == 0: 
+            newItem.save()
 
 
 @app.route('/')
