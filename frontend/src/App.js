@@ -63,10 +63,10 @@ class App extends Component {
               <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay} isSignedIn={ this.state.isSignedIn } user={ this.state.currentUser }/>
             </Route>
             <Route path="/wishlist">
-              <WishListPage isSignedIn= {this.state.isSignedIn} />
+              <WishListPage isSignedIn= {this.state.isSignedIn} whichtodisplay={this.whichtodisplay}/>
             </Route>
             <Route path="/">
-              <HomePage />
+              <HomePage whichtodisplay={this.whichtodisplay}/>
             </Route>
           </Switch>
         </div>
@@ -76,9 +76,17 @@ class App extends Component {
 }
 export default App
 class HomePage extends Component {
+  static get propTypes () {
+    return {
+      whichtodisplay: PropTypes.any,
+    }
+  }
   render () {
     return (
-      <h2 align='center'>Welcome To VSMall</h2>
+      <div className="container">
+        <h2 align='center'>Welcome To VSMall</h2>
+        <h2 align='center'>{this.props.whichtodisplay()}</h2>
+      </div>
     )    
   }
 }
@@ -106,12 +114,18 @@ class CatalogPage extends Component  {
   }
 }
 class WishListPage extends Component  {
+  static get propTypes () {
+    return {
+      whichtodisplay: PropTypes.any,
+    }
+  }
+
   state = {
     items: []
   }
   
   componentDidMount () {
-    axios.get('http://localhost:5000/catalog')
+    axios.get('http://localhost:5000/user')
       .then(res => {
         const items = res.data.items_list
         this.setState({ items })
@@ -125,6 +139,7 @@ class WishListPage extends Component  {
     const {items} = this.state
     return (
       <div className="container">
+        <h2 align='center'>{this.props.whichtodisplay()}</h2>
         <WishList items_list={items} isSignedIn={this.props.isSignedIn}/>
       </div>
     )    

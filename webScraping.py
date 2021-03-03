@@ -28,7 +28,8 @@ def scrapeHollister(link, admin):
    link = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[2]/div[1]/a/@href')
    for x in range(len(name)):
       new_image = image[x].replace("imageType", "prod1")
-      clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, sale[x], "https://www.hollisterco.com" + link[x]))
+      
+      clothes.append(Cloth("Hollister" , name[x] + "(Hollister)", price[x].strip(), new_image, sale[x], "https://www.hollisterco.com" + link[x]))
    return clothes
 
 def scrapeUniqlo(link, admin):
@@ -41,5 +42,5 @@ def scrapeUniqlo(link, admin):
    price = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span/text()')
    link = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/@href')
    for i in range(len(name)):
-      apparel.append(Cloth("Uniqlo", name[i], price[i], image[i], None, link[i]))
+      apparel.append(Cloth("Uniqlo", name[i] + "(Uniqlo)", price[i], image[i], None, link[i]))
    return apparel

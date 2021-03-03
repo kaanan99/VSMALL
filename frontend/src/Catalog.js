@@ -37,7 +37,7 @@ class Catalog extends Component {
   }
 
   filterBySale () {
-    axios.get('http://localhost:5000/catalog?sale=Sale')
+    axios.get('http://localhost:5000/catalog?sale=discount')
       .then(res => {
         const items = res.data.items_list
         this.setState({ items_list : items })

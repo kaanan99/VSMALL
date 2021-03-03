@@ -7,7 +7,8 @@ import PropTypes from 'prop-types'
 class WishList extends Component {
   static get propTypes () {
     return {
-      isSignedIn: PropTypes.any
+      isSignedIn: PropTypes.any,
+      items_list: PropTypes.any
     }
   }
   state = {items_list: this.props.items_list}
