@@ -4,6 +4,7 @@ import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import WishListButton from './WishListButton'
 
 class Catalog extends Component {
   state = {items_list: []}
@@ -55,7 +56,7 @@ class Catalog extends Component {
                 xs={{ span: 6 }} sm={{ span: 4 }}
                 md={{ span: 3 }} lg={{ span: 2 }}
               ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/>
-              <button name="WishList">Add to WishList</button></Col>
+              <WishListButton isSignedIn = { this.props.isSignedIn }></WishListButton></Col>
             )}
            </Row>
         </div>

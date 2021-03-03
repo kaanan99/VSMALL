@@ -60,7 +60,7 @@ class App extends Component {
               renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/catalog">
-              <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay}/>
+              <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay} isSignedIn={ this.state.isSignedIn }/>
             </Route>
             <Route path="/wishlist">
               <WishListPage />
@@ -87,7 +87,8 @@ class CatalogPage extends Component  {
   static get propTypes () {
     return {
       loginStateHandler: PropTypes.any,
-      whichtodisplay: PropTypes.any
+      whichtodisplay: PropTypes.any,
+      isSignedIn: PropTypes.any
     }
   }
 
@@ -96,7 +97,7 @@ class CatalogPage extends Component  {
       <div className="container">
         <h2 align='center'>Welcome to VSMall</h2>
         <h2 align='center'>{this.props.whichtodisplay()}</h2>
-        <Catalog />
+        <Catalog isSignedIn={ this.props.isSignedIn }/>
       </div>
     )    
   }
