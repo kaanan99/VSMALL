@@ -30,3 +30,16 @@ def scrapeHollister(link, admin):
       new_image = image[x].replace("imageType", "prod1")
       clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, sale[x], "https://www.hollisterco.com" + link[x]))
    return clothes
+
+def scrapeUniqlo(link, admin):
+   apparel = []
+   admin_user_agents = {"Kaanan": {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:85.0) Gecko/20100101 Firefox/85.0'}}
+   pageContent = requests.get(link, headers = admin_user_agents["Kaanan"])
+   tree = html.fromstring(pageContent.content)
+   name = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/text()')
+   image = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[1]/div/div[1]/a/img/@src')
+   price = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span/text()')
+   link = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/@href')
+   for i in range(len(name)):
+      apparel.append(Cloth("Uniqlo", name[i], price[i], image[i], None, link[i]))
+   return apparel
