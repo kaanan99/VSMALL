@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-from vsmallDB import User, Item
+from vsmallDB import User, Item, WishList
 from webScraping import *
 
 app = Flask(__name__)
@@ -75,3 +75,12 @@ def get_user():
         newUser.save()
         resp = jsonify(newUser), 201
         return resp
+
+@app.route('/wishlist', methods=['GET', 'POST'])
+def wish_list():
+   if request.method == 'POST':
+      r = request.get_json()
+      found = WishList().find_by_name(r['name'])
+      if len(found)==0:
+         WishList().collection.insert_one({'name':r['name'], 'wishlist':[r['item']]})
+      return jsonify(r), 201

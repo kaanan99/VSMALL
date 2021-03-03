@@ -105,3 +105,19 @@ class Item(Model):  # catalog items collection
         for item in items:
             item["_id"] = str(item["_id"])
         return items
+
+class WishList(Model):  # users collection
+    db_client = pymongo.MongoClient('localhost', localhost)
+    collection = db_client["VSMALL"]["wish_list"]
+
+    def find_all(self):
+        users = list(self.collection.find())
+        for user in users:
+            user["_id"] = str(user["_id"])
+        return users
+
+    def find_by_name(self, name):
+        users = list(self.collection.find({"name": name}))
+        for user in users:
+            user["_id"] = str(user["_id"])
+        return users
