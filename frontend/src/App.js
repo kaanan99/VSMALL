@@ -107,14 +107,29 @@ class CatalogPage extends Component  {
 }
 class WishListPage extends Component  {
   state = {
-    items: []
+    wishList: []
   }
+
   
+  // componentDidMount () {
+  //   if(this.props.isSignedIn){
+  //     axios.get('localhost:5000/wishlist/' + this.props.user.email)
+  //       .then(res => {
+  //         const items = res.data.wishlist
+  //         this.setState({ wishList : items})
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error)
+  //       })
+  //   } else {
+  //     alert('Sign in to use this feature')
+  //   }
+  // }
   componentDidMount () {
     axios.get('http://localhost:5000/catalog')
       .then(res => {
         const items = res.data.items_list
-        this.setState({ items })
+        this.setState({ wishList : items})
       })
       .catch(function (error) {
         console.log(error)
@@ -125,7 +140,7 @@ class WishListPage extends Component  {
     const {items} = this.state
     return (
       <div className="container">
-        <WishList items_list={items} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
+        <WishList wishList={this.state.wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
       </div>
     )    
   }

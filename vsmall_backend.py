@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-from vsmallDB import User, Item, WishList
+from vsmallDB import Item, WishList
 from webScraping import *
 
 app = Flask(__name__)
@@ -60,21 +60,6 @@ def view_catalog():
         resp = jsonify(newItem), 201
         return resp
 
-@app.route('/users', methods=['GET', 'POST'])
-def get_user():
-    if request.method == 'GET':
-        search_name = request.args.get('name')
-        if search_name:
-            result = User().find_by_name(search_name)
-        else:
-            result = User().find_all()
-        return {"user_list": result}
-    elif request.method == 'POST':
-        userToAdd = request.get_json()
-        newUser = User()
-        newUser.save()
-        resp = jsonify(newUser), 201
-        return resp
 
 @app.route('/wishlist', methods=['POST'])
 def wish_list():
@@ -88,12 +73,10 @@ def wish_list():
          old_wishlist.append(r['item'])
          WishList().collection.update_one({'name': r['name']}, {'$set':{'wishlist':old_wishlist}})
       return jsonify(r), 201
-   elif request.method == 'GET':
-      print('hi')
 
 @app.route('/wishlist/<name>', methods=['GET'])
 def get_wishlist(name):
-   print(name)
+   print("ENTERED")
    found = WishList().find_by_name(name)
-   print("Entered")
+   print(found[0]['wishlist'])
    return {'wishlist':found[0]['wishlist']}
