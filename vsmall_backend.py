@@ -17,6 +17,7 @@ CORS(app)
 def webscrape():
     clothes = scrapeHollister(
         'https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
+    clothes += scrapeUniqlo('https://www.uniqlo.com/us/en/men/new-arrivals', "Kannan")
     for c in clothes:
         json = {"name": c.name, "price": c.price, "image": c.image,
                 "sale": c.sale, "brand": c.brand, "link": c.link}

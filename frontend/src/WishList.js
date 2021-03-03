@@ -16,7 +16,7 @@ class WishList extends Component {
     const { items_list } = this.state
     return (
         <div className="WishList">
-          <h2 align='center'>Name's WishList</h2>
+          <h2 align='center'>Names WishList</h2>
           <Row gutter={40}>
             {
             (items_list).map(item =>

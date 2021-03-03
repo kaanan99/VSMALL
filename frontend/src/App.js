@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   loginStateHandler = (status, cu) => {
-    const { isSignedIn, currentUser } = this.state
+    const { isSignedIn } = this.state
     if (status !== isSignedIn){
       this.setState({
         isSignedIn: status,
@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   whichtodisplay = () => {
-    const { isSignedIn, currentUser } = this.state
+    const { isSignedIn } = this.state
     if (isSignedIn){
       return <Logout loginStateHandler={this.loginStateHandler}/>
     }

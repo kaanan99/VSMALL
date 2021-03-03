@@ -7,6 +7,11 @@ import axios from 'axios'
 import WishListButton from './WishListButton'
 
 class Catalog extends Component {
+  static get propTypes () {
+    return {
+      isSignedIn: PropTypes.any
+    }
+  }
   state = {items_list: []}
 
   componentDidMount () {
