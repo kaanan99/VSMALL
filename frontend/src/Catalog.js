@@ -44,6 +44,8 @@ class Catalog extends Component {
 
   render () {
     const {items_list} = this.state
+    // alert('Catalog')
+    // alert(this.props.user)
     return (
         <div className="Catalog">
           <button name="ShowAll" onClick={() => this.showAll()}>Show All</button>
@@ -56,7 +58,7 @@ class Catalog extends Component {
                 xs={{ span: 6 }} sm={{ span: 4 }}
                 md={{ span: 3 }} lg={{ span: 2 }}
               ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/>
-              <WishListButton isSignedIn = { this.props.isSignedIn }></WishListButton></Col>
+              <WishListButton isSignedIn = { this.props.isSignedIn } user={ this.props.user} item={item}></WishListButton></Col>
             )}
            </Row>
         </div>

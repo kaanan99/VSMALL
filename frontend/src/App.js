@@ -60,7 +60,7 @@ class App extends Component {
               renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/catalog">
-              <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay} isSignedIn={ this.state.isSignedIn }/>
+              <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay} isSignedIn={ this.state.isSignedIn } user={ this.state.currentUser }/>
             </Route>
             <Route path="/wishlist">
               <WishListPage />
@@ -88,16 +88,19 @@ class CatalogPage extends Component  {
     return {
       loginStateHandler: PropTypes.any,
       whichtodisplay: PropTypes.any,
-      isSignedIn: PropTypes.any
+      isSignedIn: PropTypes.any,
+      user: PropTypes.any
     }
   }
 
   render () {
+    // alert('Catalog page')
+    // alert(this.props.user)
     return (
       <div className="container">
         <h2 align='center'>Welcome to VSMall</h2>
         <h2 align='center'>{this.props.whichtodisplay()}</h2>
-        <Catalog isSignedIn={ this.props.isSignedIn }/>
+        <Catalog isSignedIn={ this.props.isSignedIn } user={ this.props.user }/>
       </div>
     )    
   }

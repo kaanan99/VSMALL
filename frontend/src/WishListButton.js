@@ -11,11 +11,8 @@ class WishListButton extends Component {
 
   handleClick () {
     if (this.props.isSignedIn) {
-      alert('before')
-      alert(this.props.user)
-      alert('after')
+      alert(this.props.user.name)
     } else {
-      alert('before')
       alert('You need to log in to add items to your wishlist')
     }
   }
