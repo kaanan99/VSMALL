@@ -83,4 +83,8 @@ def wish_list():
       found = WishList().find_by_name(r['name'])
       if len(found)==0:
          WishList().collection.insert_one({'name':r['name'], 'wishlist':[r['item']]})
+      else:
+         old_wishlist = found[0]['wishlist']
+         old_wishlist.append(r['item'])
+         WishList().collection.update_one({'name': r['name']}, {'$set':{'wishlist':old_wishlist}})
       return jsonify(r), 201
