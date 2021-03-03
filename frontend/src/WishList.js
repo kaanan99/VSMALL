@@ -3,14 +3,27 @@ import ItemCard from './ItemCard'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 class WishList extends Component {
   static get propTypes () {
     return {
-      isSignedIn: PropTypes.any
+      isSignedIn: PropTypes.any,
+      user: PropTypes.any
     }
   }
   state = {items_list: this.props.items_list}
+
+  componentDidMount () {
+    axios.get('http://localhost:5000/wishlist/')
+      .then(res => {
+        const items = res.data.items_list
+        this.setState({ items_list : items})
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
 
   render () {
     const { items_list } = this.state

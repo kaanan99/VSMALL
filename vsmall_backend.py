@@ -76,7 +76,7 @@ def get_user():
         resp = jsonify(newUser), 201
         return resp
 
-@app.route('/wishlist', methods=['GET', 'POST'])
+@app.route('/wishlist', methods=['POST'])
 def wish_list():
    if request.method == 'POST':
       r = request.get_json()
@@ -88,3 +88,12 @@ def wish_list():
          old_wishlist.append(r['item'])
          WishList().collection.update_one({'name': r['name']}, {'$set':{'wishlist':old_wishlist}})
       return jsonify(r), 201
+   elif request.method == 'GET':
+      print('hi')
+
+@app.route('/wishlist/<name>', methods=['GET'])
+def get_wishlist(name):
+   print(name)
+   found = WishList().find_by_name(name)
+   print("Entered")
+   return {'wishlist':found[0]['wishlist']}

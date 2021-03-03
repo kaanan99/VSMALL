@@ -63,7 +63,7 @@ class App extends Component {
               <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay} isSignedIn={ this.state.isSignedIn } user={ this.state.currentUser }/>
             </Route>
             <Route path="/wishlist">
-              <WishListPage isSignedIn= {this.state.isSignedIn} />
+              <WishListPage isSignedIn= {this.state.isSignedIn} user={this.state.currentUser}/>
             </Route>
             <Route path="/">
               <HomePage />
@@ -125,7 +125,7 @@ class WishListPage extends Component  {
     const {items} = this.state
     return (
       <div className="container">
-        <WishList items_list={items} isSignedIn={this.props.isSignedIn}/>
+        <WishList items_list={items} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
       </div>
     )    
   }
