@@ -77,9 +77,6 @@ class Catalog extends Component {
 
   render () {
     const {items_list} = this.state
-    //console.log(items_list)
-    // alert('Catalog')
-    // alert(this.props.user)
     return (
         <div className="Catalog">
           <button name="ShowAll" onClick={() => this.showAll()}>Show All</button>

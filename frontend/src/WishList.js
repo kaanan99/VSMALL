@@ -17,8 +17,6 @@ class WishList extends Component {
 
   
   render () {
-    console.log("In WishList")
-    console.log(this.props.wishList)
     const { wishList } = this.props
       return (
           <div className="WishList">

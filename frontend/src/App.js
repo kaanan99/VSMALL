@@ -125,34 +125,17 @@ class WishListPage extends Component  {
         .then(res => {
           const items = res.data.wishlist
           this.setState({ wishList : items})
-          // console.log("Middle")
-          // console.log(this.state.wishList)
         })
         .catch(function (error) {
           console.log(error)
         })
-      // console.log("After")
-      // console.log(this.state.wishList)
     } else {
       alert('Sign in to use this feature')
     }
   }
 
   render () {
-    //const {items} = this.state
     if (this.props.isSignedIn) {
-      // axios.get('http://localhost:5000/wishlist/' + this.props.user.email)
-      //   .then(res => {
-      //     const items = res.data.wishlist
-      //     this.setState({ wishList: []})
-      //     this.setState({ wishList : items})
-      //     console.log(this.state.wishList)
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error)
-      //   })
-        // console.log("Render")
-        // console.log(this.state.wishList)
         return (
           <div className="container">
             <WishList wishList={this.state.wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
