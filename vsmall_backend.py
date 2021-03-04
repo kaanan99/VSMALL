@@ -68,16 +68,18 @@ def wish_list():
       r = request.get_json()
       found = WishList().find_by_name(r['name'])
       if len(found)==0:
+         print('new')
          WishList().collection.insert_one({'name':r['name'], 'wishlist':[r['item']]})
       else:
+         print('old')
          old_wishlist = found[0]['wishlist']
          old_wishlist.append(r['item'])
+         print("updated list")
+         print(len(old_wishlist))
          WishList().collection.update_one({'name': r['name']}, {'$set':{'wishlist':old_wishlist}})
       return jsonify(r), 201
 
 @app.route('/wishlist/<name>', methods=['GET'])
 def get_wishlist(name):
-   print("ENTERED")
    found = WishList().find_by_name(name)
-   print(found[0]['wishlist'])
    return {'wishlist':found[0]['wishlist']}

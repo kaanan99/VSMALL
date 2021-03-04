@@ -27,7 +27,7 @@ class Catalog extends Component {
   }
 
   showAll () {
-    console.log("Reverting")
+    // console.log("Reverting")
     axios.get('http://localhost:5000/catalog')
       .then(res => {
         const items = res.data.items_list
@@ -77,7 +77,7 @@ class Catalog extends Component {
 
   render () {
     const {items_list} = this.state
-    console.log(items_list)
+    //console.log(items_list)
     // alert('Catalog')
     // alert(this.props.user)
     return (
@@ -90,15 +90,13 @@ class Catalog extends Component {
             {
             items_list.map(item =>
               <Col
-                key = {item.name}
+                key = {item._id}
                 xs={{ span: 6 }} sm={{ span: 4 }}
                 md={{ span: 3 }} lg={{ span: 2 }}
               ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/>
               <WishListButton isSignedIn = { this.props.isSignedIn } user={ this.props.user} item={item}></WishListButton></Col>
             )}
            </Row>
-           {console.log("After")}
-           {console.log(items_list)}
         </div>
         
     )
