@@ -12,7 +12,7 @@ class WishListButton extends Component {
 
   handleClick () {
     if (this.props.isSignedIn) {
-      axios.post('http://localhost:5000/wishlist', {'name':this.props.user.name, 'item': this.props.item})
+      axios.post('http://localhost:5000/wishlist', {'name':this.props.user.email, 'item': this.props.item})
       .then(alert('Item added to your wishlist!'))
     } else {
       alert('You need to log in to add items to your wishlist')

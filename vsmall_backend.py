@@ -66,12 +66,15 @@ def view_catalog():
 def wish_list():
    if request.method == 'POST':
       r = request.get_json()
+      print(r)
       found = WishList().find_by_name(r['name'])
       if len(found)==0:
          print('new')
          WishList().collection.insert_one({'name':r['name'], 'wishlist':[r['item']]})
       else:
          print('old')
+         print(WishList().collection)
+         print(found[0]['name'])
          old_wishlist = found[0]['wishlist']
          old_wishlist.append(r['item'])
          print("updated list")
