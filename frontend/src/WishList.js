@@ -3,7 +3,6 @@ import ItemCard from './ItemCard'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
 import PropTypes from 'prop-types'
-// import axios from 'axios'
 
 class WishList extends Component {
   static get propTypes () {
