@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import make_response
 from flask import jsonify
 from flask_cors import CORS
 from vsmallDB import Item, WishList
@@ -62,7 +63,7 @@ def view_catalog():
         return resp
 
 
-@app.route('/wishlist', methods=['POST'])
+@app.route('/wishlist', methods=['POST', 'DELETE'])
 def wish_list():
    if request.method == 'POST':
       r = request.get_json()
@@ -74,8 +75,23 @@ def wish_list():
          old_wishlist.append(r['item'])
          WishList().collection.update_one({'name': r['name']}, {'$set':{'wishlist':old_wishlist}})
       return jsonify(r), 201
+   elif request.method == 'DELETE':
+      new_wishlist = []
+      user_name = request.args.get('name')
+      print(request.args)
+      id = request.args.get('id')
+      print(id)
+      wishlist = WishList().find_by_name(user_name)[0]['wishlist']
+      for item in wishlist:
+         if item['_id'] != id:
+            new_wishlist.append(item)
+      WishList().collection.update_one({'name':user_name}, {'$set':{'wishlist':new_wishlist}})
+      resp = make_response(jsonify(success=True), 204)
+      return resp
 
 @app.route('/wishlist/<name>', methods=['GET'])
 def get_wishlist(name):
    found = WishList().find_by_name(name)
-   return {'wishlist':found[0]['wishlist']}
+   if len(found) > 0:
+      return {'wishlist':found[0]['wishlist']}
+   return {'wishlist':[]}
