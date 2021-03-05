@@ -20,7 +20,6 @@ class WishList extends Component {
     const { wishList } = this.props
       return (
           <div className="WishList">
-            <h2 align='center'>{this.props.user.name}'s WishList</h2>
             <Row gutter={40}>
               {
               wishList.map(item =>

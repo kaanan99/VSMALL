@@ -5,12 +5,11 @@ import {
   Route,
   Link
 } from "react-router-dom"
-import Catalog from './Catalog'
 import Login from './Login'
 import Logout from './Logout'
-import axios from 'axios'
-import WishList from './WishList'
-import PropTypes from 'prop-types'
+import WishListPage from './WishListPage'
+import HomePage from './HomePage'
+import CatalogPage from './CatalogPage'
 
 class App extends Component {
   state = {
@@ -63,10 +62,10 @@ class App extends Component {
               <CatalogPage loginStateHandler={this.loginStateHandler} whichtodisplay={this.whichtodisplay} isSignedIn={ this.state.isSignedIn } user={ this.state.currentUser }/>
             </Route>
             <Route path="/wishlist">
-              <WishListPage isSignedIn= {this.state.isSignedIn} user={this.state.currentUser}/>
+              <WishListPage isSignedIn= {this.state.isSignedIn} user={this.state.currentUser} whichtodisplay={this.whichtodisplay}/>
             </Route>
             <Route path="/">
-              <HomePage />
+              <HomePage whichtodisplay={this.whichtodisplay}/>
             </Route>
           </Switch>
         </div>
@@ -75,77 +74,3 @@ class App extends Component {
   }
 }
 export default App
-class HomePage extends Component {
-  render () {
-    return (
-      <h2 align='center'>Welcome To VSMall</h2>
-    )    
-  }
-}
-
-class CatalogPage extends Component  {
-  static get propTypes () {
-    return {
-      loginStateHandler: PropTypes.any,
-      whichtodisplay: PropTypes.any,
-      isSignedIn: PropTypes.any,
-      user: PropTypes.any
-    }
-  }
-
-  render () {
-    // alert('Catalog page')
-    // alert(this.props.user)
-    return (
-      <div className="container">
-        <h2 align='center'>Welcome to VSMall</h2>
-        <h2 align='center'>{this.props.whichtodisplay()}</h2>
-        <Catalog isSignedIn={ this.props.isSignedIn } user={ this.props.user }/>
-      </div>
-    )    
-  }
-}
-class WishListPage extends Component  {
-  static get propTypes () {
-    return {
-      isSignedIn: PropTypes.any,
-      user: PropTypes.any
-    }
-  }
-  
-  state = {
-    wishList: []
-  }
-
-  
-  componentDidMount () {
-    if(this.props.isSignedIn){
-
-      axios.get('http://localhost:5000/wishlist/' + this.props.user.email)
-        .then(res => {
-          const items = res.data.wishlist
-          this.setState({ wishList : items})
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    } else {
-      alert('Sign in to use this feature')
-    }
-  }
-
-  render () {
-    if (this.props.isSignedIn) {
-        return (
-          <div className="container">
-            <WishList wishList={this.state.wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
-          </div>
-        )
-    }
-    else {
-      return (
-        <h2 align='center'>You must sign in to use this feature</h2>
-      )
-    }
-  }
-}
