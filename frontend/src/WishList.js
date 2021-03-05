@@ -4,8 +4,11 @@ import DeleteButton from './DeleteButton'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
 import PropTypes from 'prop-types'
+<<<<<<< HEAD
 import axios from 'axios'
 // import axios from 'axios'
+=======
+>>>>>>> 60b53a272aa78b009fca46f062b95eed0cb7eb70
 
 class WishList extends Component {
   static get propTypes () {
@@ -38,7 +41,6 @@ class WishList extends Component {
     const { wishList } = this.props
       return (
           <div className="WishList">
-            <h2 align='center'>{this.props.user.name}'s WishList</h2>
             <Row gutter={40}>
               {
               wishList.map(item =>
