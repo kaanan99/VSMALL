@@ -90,7 +90,7 @@ class Catalog extends Component {
                 key = {item._id}
                 xs={{ span: 6 }} sm={{ span: 4 }}
                 md={{ span: 3 }} lg={{ span: 2 }}
-              ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale}/>
+              ><ItemCard image={item.image} name={item.name} price={item.price} link={item.link} sale={item.sale} brand={item.brand}/>
               <WishListButton isSignedIn = { this.props.isSignedIn } user={ this.props.user} item={item}></WishListButton></Col>
             )}
            </Row>

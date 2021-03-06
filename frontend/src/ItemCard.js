@@ -8,7 +8,8 @@ class ItemCard extends Component {
       name: PropTypes.any,
       sale: PropTypes.any,
       price: PropTypes.any,
-      link: PropTypes.any
+      link: PropTypes.any,
+      brand: PropTypes.any
     }
   }
 
@@ -16,7 +17,8 @@ class ItemCard extends Component {
     return (
             <div className = 'ItemCard' onClick={() => this.handleClick()}>
                 <img src={this.props.image} alt={this.props.name} width="100%"></img>
-                <h4 align="center">{this.props.name}</h4>
+                <h6 align="left">{this.props.brand} </h6>
+                <h5 align="center">{this.props.name}</h5>
                 <p>{this.props.sale} {this.props.price}</p>
             </div>
     )

@@ -17,7 +17,7 @@ class WishListPage extends Component  {
     }
   
     
-    componentDidMount () {
+    updated () {
       if(this.props.isSignedIn){
         axios.get('http://localhost:5000/wishlist/' + this.props.user.email)
           .then(res => {
@@ -31,20 +31,25 @@ class WishListPage extends Component  {
         alert('Sign in to use this feature')
       }
     }
-  
+
     render () {
+      this.updated()
+      const {wishList} = this.state
       if (this.props.isSignedIn) {
           return (
             <div className="container">
                 <h2 align='center'>{this.props.user.name}'s WishList</h2>
                 <h2 align='center'>{this.props.whichtodisplay()}</h2>
-                <WishList wishList={this.state.wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
+                <WishList wishList={wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
             </div>
           )
       }
       else {
         return (
+          <div className="container">
           <h2 align='center'>You must sign in to use this feature</h2>
+          <h2 align='center'>{this.props.whichtodisplay()}</h2>
+          </div>
         )
       }
     }

@@ -16,6 +16,7 @@ CORS(app)
 
 @app.before_first_request
 def webscrape():
+    print("Being Called")
     clothes = scrapeHollister(
         'https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
     clothes += scrapeUniqlo('https://www.uniqlo.com/us/en/men/new-arrivals', "Kannan")

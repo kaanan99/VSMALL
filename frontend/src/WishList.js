@@ -4,11 +4,7 @@ import DeleteButton from './DeleteButton'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
 import PropTypes from 'prop-types'
-<<<<<<< HEAD
 import axios from 'axios'
-// import axios from 'axios'
-=======
->>>>>>> 60b53a272aa78b009fca46f062b95eed0cb7eb70
 
 class WishList extends Component {
   static get propTypes () {
@@ -18,15 +14,15 @@ class WishList extends Component {
       wishList: PropTypes.any
     }
   }
-  state = {wishList: this.props.wishList, change:0}
+  
+  state = {wishList: this.props.wishList}
 
   handleClick (item) {
-    const { wishList } = this.state;
+    const { wishList } = this.state
     axios.delete('http://localhost:5000/wishlist?name=' + this.props.user.email+'&id=' + item._id)
       .then(res => {
         // 204 status code means the action was successfully enacted
         if (res.status === 204) {
-          console.log("entered")
           this.setState({
             wishList: wishList.filter(function(value){ 
               return value._id != item._id
