@@ -39,8 +39,12 @@ def scrapeUniqlo(link, admin):
    tree = html.fromstring(pageContent.content)
    name = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/text()')
    image = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[1]/div/div[1]/a/img/@src')
-   price = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span/text()')
+   price = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span[@class = "product-sales-price saleprice" or @class = "product-sales-price"]/text()')
+   sale = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span[@class = "product-sales-price saleprice" or @class = "product-sales-price"]/@class')
    link = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/@href')
    for i in range(len(name)):
-      apparel.append(Cloth("Uniqlo", name[i] + "(Uniqlo)", price[i], image[i], None, link[i]))
+      temp = None
+      if sale[i] == "product-sales-price":
+         temp = "discount"
+      apparel.append(Cloth("Uniqlo", name[i], price[i], image[i], temp, link[i]))
    return apparel

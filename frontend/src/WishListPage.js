@@ -36,7 +36,7 @@ class WishListPage extends Component  {
       if (this.props.isSignedIn) {
           return (
             <div className="container">
-                <h2 align='center'>{this.props.user.name}'s WishList</h2>
+                <h2 align='center'>{this.props.user.name}s WishList</h2>
                 <h2 align='center'>{this.props.whichtodisplay()}</h2>
                 <WishList wishList={this.state.wishList} isSignedIn={this.props.isSignedIn} user={this.props.user}/>
             </div>
