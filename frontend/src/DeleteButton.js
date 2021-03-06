@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import axios from 'axios'
 
 class DeleteButton extends Component{
-
+    static get propTypes () {
+        return {
+          onClick: PropTypes.any
+        }
+      }
+    
     render () {
         return (<button name="Delete" onClick = {() => this.props.onClick()}>Delete From WishList</button>)
     }

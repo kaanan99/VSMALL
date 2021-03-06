@@ -28,8 +28,9 @@ def scrapeHollister(link, admin):
    link = tree.xpath('/html/body/div[5]/div[5]/main/div/ul/li/div/div[2]/div[1]/a/@href')
    for x in range(len(name)):
       new_image = image[x].replace("imageType", "prod1")
-      
-      clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, sale[x], "https://www.hollisterco.com" + link[x]))
+      if sale[x] == "discount":
+         temp = "Sale"
+      clothes.append(Cloth("Hollister" , name[x], price[x].strip(), new_image, temp, "https://www.hollisterco.com" + link[x]))
    return clothes
 
 def scrapeUniqlo(link, admin):
@@ -39,8 +40,12 @@ def scrapeUniqlo(link, admin):
    tree = html.fromstring(pageContent.content)
    name = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/text()')
    image = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[1]/div/div[1]/a/img/@src')
-   price = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span/text()')
+   price = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span[@class = "product-sales-price saleprice" or @class = "product-sales-price"]/text()')
+   sale = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[4]/div[1]/span[@class = "product-sales-price saleprice" or @class = "product-sales-price"]/@class')
    link = tree.xpath('/html/body/div[1]/div[6]/div[3]/div[2]/div[6]/div[2]/div/div[1]/ul/li/div/div/div[2]/a/@href')
    for i in range(len(name)):
-      apparel.append(Cloth("Uniqlo", name[i], price[i], image[i], None, link[i]))
+      temp = None
+      if sale[i] == "product-sales-price":
+         temp = "Sale"
+      apparel.append(Cloth("Uniqlo", name[i], price[i], image[i], temp, link[i]))
    return apparel
