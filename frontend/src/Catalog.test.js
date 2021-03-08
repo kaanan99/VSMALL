@@ -1,10 +1,11 @@
 import Catalog from './Catalog'
+import ItemCard from './Itemcard';
 import { render, fireEvent } from '@testing-library/react';
 
 test('should render an empty Catalog', () => {
-/*    let x = new Array(null, null, null);
+    let x = [];
     const catalog = render(<Catalog items_list={x}/>);
-    const item = catalog.getByRole('ItemCard');
-    expect(item.innerHTML).toBe('');
-*/
+    const item = catalog.queryAllByRole('ItemCard');
+    expect(item).toStrictEqual([]);
 });
+
