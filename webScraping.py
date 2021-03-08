@@ -61,5 +61,5 @@ def scrapeUnderArmour(link, admin):
    links = tree.xpath('/html/body/div[1]/main/div/div[1]/div[1]/div[2]/div[2]/div[1]/section/div/div[2]/div[1]/a/@href')
    prices = tree.xpath('/html/body/div[1]/main/div/div[1]/div[1]/div[2]/div[2]/div[1]/section/div/div[2]/div[1]/div[2]/span/text()')
    for i in range(len(names)):
-      apparel.append(Cloth("Underarmour", names[i], prices[i], images[i], None, "https://www.underarmour.com" + links[i]))
+      apparel.append(Cloth("Underarmour", names[i], prices[i], images[i], "", "https://www.underarmour.com" + links[i]))
    return apparel

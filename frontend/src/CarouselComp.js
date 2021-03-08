@@ -12,7 +12,7 @@ class CarouselComp extends Component {
 
     render(){
     return (
-        <div className="carousel-wrapper">
+        <div role="carousel" className="carousel-wrapper">
             <Carousel infiniteLoop useKeyboardArrows autoPlay>
                 {this.props.items.map(item =>
                 <div key={item}>
@@ -21,6 +21,6 @@ class CarouselComp extends Component {
             </Carousel>
         </div>
     )
-}
+    }
 }
 export default CarouselComp
