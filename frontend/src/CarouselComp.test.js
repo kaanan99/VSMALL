@@ -1,5 +1,5 @@
 import CarouselComp from './CarouselComp'
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 test('should render an empty Carousel', () => {
     let x = new Array();
