@@ -50,3 +50,16 @@ def scrapeUniqlo(link, admin):
          temp = "Sale"
       apparel.append(Cloth("Uniqlo", name[i], price[i], image[i], temp, link[i]))
    return apparel
+
+def scrapeUnderArmour(link, admin):
+   apparel = []
+   admin_user_agents = {"Kaanan": {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:85.0) Gecko/20100101 Firefox/85.0'}}
+   pageContent = requests.get(link, headers = admin_user_agents["Kaanan"])
+   tree = html.fromstring(pageContent.content)
+   names = tree.xpath('/html/body/div[1]/main/div/div[1]/div[1]/div[2]/div[2]/div[1]/section/div[1]/div[2]/div[1]/a/text()')
+   images = tree.xpath('/html/body/div[1]/main/div/div[1]/div[1]/div[2]/div[2]/div[1]/section/div/div[1]/a/picture[2]/img/@src')
+   links = tree.xpath('/html/body/div[1]/main/div/div[1]/div[1]/div[2]/div[2]/div[1]/section/div/div[2]/div[1]/a/@href')
+   prices = tree.xpath('/html/body/div[1]/main/div/div[1]/div[1]/div[2]/div[2]/div[1]/section/div/div[2]/div[1]/div[2]/span/text()')
+   for i in range(len(names)):
+      apparel.append(Cloth("Underarmour", names[i], prices[i], images[i], "", "https://www.underarmour.com" + links[i]))
+   return apparel

@@ -75,6 +75,18 @@ class Catalog extends Component {
       })
   }
 
+  filterByUnderarmour () {
+    axios.get('http://localhost:5000/catalog?brand=Underarmour')
+      .then(res => {
+        const items = res.data.items_list
+        this.setState({ items_list : [] })
+        this.setState({ items_list : items })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
   render () {
     const {items_list} = this.state
     return (
@@ -83,6 +95,7 @@ class Catalog extends Component {
           <button name="FilterbySale" onClick={() => this.filterBySale()}>Sale</button>
           <button name="FilterbyUniqlo" onClick={() => this.filterByUniqlo()}>Uniqlo</button>
           <button name="FilterbyHollister" onClick={() => this.filterByHollister()}>Hollister</button>
+          <button name="FilterbyUnderarmour" onClick={() => this.filterByUnderarmour()}>Underarmour</button>
           <Row gutter={40}>
             {
             items_list.map(item =>

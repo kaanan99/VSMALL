@@ -24,7 +24,7 @@ class HomePage extends Component {
 
     render () {
       return (
-        <div className="container">
+        <div role="homepage" className="container">
             <h2 align='center'>Welcome To VSMall</h2>
             <h2 align='center'>{this.props.whichtodisplay()}</h2>
             <div>
