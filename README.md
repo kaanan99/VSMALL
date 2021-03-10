@@ -10,6 +10,9 @@ The project was made using REACT for the frontend and python for the back end. M
 ### Python Dependencies: <br>
 pip install -r requirements.txt <br>
 ### REACT Dependencies <br>
+**Move to frontend folder**<br>
+cd frontend
+**Install** <Br>
 npm install <br>
 ### Running Backend <br>
 **If virtual environment is not installed:** <br>
