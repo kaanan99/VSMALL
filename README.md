@@ -2,8 +2,8 @@
 
 
 ## Description<br>
-VSMALL is a tool which webscapes clothes from various webstores and puts them into one place to make shopping easier.<br>
-The project currently works for mens clothes from Hollister, Uniqlo, and Under Amour.<br>
+VSMALL is a tool which webscapes clothes from various webstores and puts them into one place to make shopping easier.
+The project currently works for mens clothes from Hollister, Uniqlo, and Under Amour.
 The project was made using REACT for the frontend and python for the back end. Mongo DB was used as the database to store everything<br><br>
 
 Setting up/ runnung style plugins for Python:
