@@ -36,23 +36,6 @@ class Model(dict):
             self.clear()
             return resp
 
-
-class User(Model):  # users collection
-    db_client = pymongo.MongoClient('localhost', localhost)
-    collection = db_client["VSMALL"]["users_list"]
-
-    def find_all(self):
-        users = list(self.collection.find())
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users
-
-    def find_by_name(self, name):
-        users = list(self.collection.find({"name": name}))
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users
-
 class Item(Model):  # catalog items collection
     db_client = pymongo.MongoClient('localhost', localhost)
     collection = db_client["VSMALL"]["items_list"]
