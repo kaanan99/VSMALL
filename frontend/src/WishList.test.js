@@ -1,6 +1,5 @@
 import WishList from './WishList'
-import ItemCard from './Itemcard';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 test('should render empty WishList', () => {
     let x = [];

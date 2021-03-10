@@ -1,6 +1,5 @@
 import Catalog from './Catalog'
-import ItemCard from './Itemcard';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 test('should render an empty Catalog', () => {
     let x = [];
