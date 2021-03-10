@@ -22,7 +22,7 @@ python3 -m flask run <br>
 ### Running Frontend <br>
 npm start <br> <br> <br>
 
-
+## Style Checking <br>
 Setting up/ runnung style plugins for Python:
 1. pip3 install pycodestyle
 2. To run do: pycodestyle --first <fileName> 
