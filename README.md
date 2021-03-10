@@ -12,9 +12,9 @@ pip install -r requirements.txt <br>
 ### REACT Dependencies <br>
 npm install <br>
 ### Running Backend <br>
-If virtual environment is not installed: <br>
+**If virtual environment is not installed:** <br>
 python3 -m venv venv <br> 
-Running Everything: <br>
+**Running Everything:** <br>
 . venv/bin/activate <br>
 export FLASK_APP=vsmall_backend.py <br>
 export FLASK_ENV=development<br>
