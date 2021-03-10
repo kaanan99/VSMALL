@@ -10,12 +10,10 @@ class Cloth:
         self.image = image
         self.sale = sale
         self.brand = brand
-        # self.ctype = ctype
         self.link = link
 
 
 def scrapeHollister(link, admin):
-   print("Function called")
    clothes = []
    admin_user_agents = {"Kaanan": {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:85.0) Gecko/20100101 Firefox/85.0'}}
    #header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:85.0) Gecko/20100101 Firefox/85.0'}

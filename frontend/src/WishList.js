@@ -28,7 +28,6 @@ class WishList extends Component {
               return value._id != item._id
             })
           })
-          console.log(this.state.wishList)
         }
       });
   }

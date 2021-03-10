@@ -16,7 +16,6 @@ CORS(app)
 
 @app.before_first_request
 def webscrape():
-    print("Being Called")
     clothes = scrapeHollister(
         'https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
     clothes += scrapeUniqlo('https://www.uniqlo.com/us/en/men/new-arrivals', "Kannan")
@@ -59,7 +58,7 @@ def view_catalog():
         return {"items_list": result}
     elif request.method == 'POST':
         itemToAdd = request.get_json()
-        newItem = User(itemToAdd)
+        newItem = Item(itemToAdd)
         newItem.save()
         resp = jsonify(newItem), 201
         return resp
@@ -80,9 +79,7 @@ def wish_list():
    elif request.method == 'DELETE':
       new_wishlist = []
       user_name = request.args.get('name')
-      print(request.args)
       id = request.args.get('id')
-      print(id)
       wishlist = WishList().find_by_name(user_name)[0]['wishlist']
       for item in wishlist:
          if item['_id'] != id:
