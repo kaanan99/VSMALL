@@ -2,7 +2,10 @@ import pymongo
 from bson import ObjectId
 
 localhost = 27017
+
+
 class Model(dict):
+
     """
     A simple model that wraps mongodb document
     """
@@ -15,13 +18,13 @@ class Model(dict):
             self.collection.insert(self)
         else:
             self.collection.update(
-                { "_id": ObjectId(self._id) }, self)
+                {"_id": ObjectId(self._id)}, self)
         self._id = str(self._id)
 
     def reload(self):
         if self._id:
             result = self.collection.find_one({"_id": ObjectId(self._id)})
-            if result :
+            if result:
                 self.update(result)
                 self._id = str(self._id)
                 return True
@@ -33,7 +36,8 @@ class Model(dict):
             self.clear()
             return resp
 
-class User(Model): #users collection
+
+class User(Model):  # users collection
     db_client = pymongo.MongoClient('localhost', localhost)
     collection = db_client["VSMALL"]["users_list"]
 
@@ -49,13 +53,7 @@ class User(Model): #users collection
             user["_id"] = str(user["_id"])
         return users
 
-    def find_by_name_job(self, name, job):
-        users = list(self.collection.find({"name": name, "job": job}))
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users    
-
-class Item(Model): #catalog items collection
+class Item(Model):  # catalog items collection
     db_client = pymongo.MongoClient('localhost', localhost)
     collection = db_client["VSMALL"]["items_list"]
 
@@ -83,6 +81,12 @@ class Item(Model): #catalog items collection
             item["_id"] = str(item["_id"])
         return items
         
+    def find_by_link(self, link):
+        items = list(self.collection.find({"link": link}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
     def find_by_brand_type(self, brand, type):
         items = list(self.collection.find({"brand": brand, "type": type}))
         for item in items:
@@ -95,8 +99,31 @@ class Item(Model): #catalog items collection
             item["_id"] = str(item["_id"])
         return items
 
-    def find_by_brand_sale_type(self, brand, sale, type):
-        items = list(self.collection.find({"brand": brand, "sale": type, "type": type}))
+    def find_by_sale_type(self, sale, type):
+        items = list(self.collection.find({"sale": sale, "type": type}))
         for item in items:
             item["_id"] = str(item["_id"])
         return items
+
+    def find_by_brand_sale_type(self, brand, sale, type):
+        items = list
+        (self.collection.find({"brand": brand, "sale": type, "type": type}))
+        for item in items:
+            item["_id"] = str(item["_id"])
+        return items
+
+class WishList(Model):  # users collection
+    db_client = pymongo.MongoClient('localhost', localhost)
+    collection = db_client["VSMALL"]["wish_list"]
+
+    def find_all(self):
+        users = list(self.collection.find())
+        for user in users:
+            user["_id"] = str(user["_id"])
+        return users
+
+    def find_by_name(self, name):
+        users = list(self.collection.find({"name": name}))
+        for user in users:
+            user["_id"] = str(user["_id"])
+        return users

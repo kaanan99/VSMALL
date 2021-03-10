@@ -1,81 +1,96 @@
 from flask import Flask
 from flask import request
+from flask import make_response
 from flask import jsonify
 from flask_cors import CORS
-from vsmallDB import User, Item
+from vsmallDB import Item, WishList
 from webScraping import *
 
 app = Flask(__name__)
 
-#CORS stands for Cross Origin Requests.
-CORS(app) #Here we'll allow requests coming from any domain. Not recommended for production environment.
+# CORS stands for Cross Origin Requests.
+CORS(app)
+# Here we'll allow requests coming from any domain.
+# Not recommended for production environment.
+
 
 @app.before_first_request
 def webscrape():
-   clothes = scrapeHollister('https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
-   for c in clothes:
-      json = {"name":c.name, "price":c.price, "image":c.image, "sale":c.sale, "brand":c.brand, "link":c.link}
-      newUser = Item(json)
-      newUser.save()
+    clothes = scrapeHollister(
+        'https://www.hollisterco.com/shop/us/guys-new-arrivals', "Kaanan")
+    clothes += scrapeUniqlo('https://www.uniqlo.com/us/en/men/new-arrivals', "Kannan")
+    clothes += scrapeUnderArmour('https://www.underarmour.com/en-us/c/mens/new-arrivals/', "Kannan")
+    for c in clothes:
+        json = {"name": c.name, "price": c.price, "image": c.image,
+                "sale": c.sale, "brand": c.brand, "link": c.link}
+        newItem = Item(json)
+        if len(Item().find_by_link(c.link)) == 0: 
+            newItem.save()
+
 
 @app.route('/')
 def helloWorld():
-   return "Hello World"
+    return "Hello World"
+
 
 @app.route('/catalog', methods=['GET', 'POST'])
 def view_catalog():
     if request.method == 'GET':
-        result = Item().find_all()
+        search_brand = request.args.get('brand')
+        search_type = request.args.get('type')
+        search_sale = request.args.get('sale')
+        if search_brand and search_type and search_sale:
+            result = Item().find_by_brand_sale_type(search_brand, search_sale, search_type)
+        elif search_brand and search_type:
+            result = Item().find_by_brand_type(search_brand, search_type)
+        elif search_brand and search_sale:
+            result = Item().find_by_brand_sale(search_brand, search_sale)
+        elif search_sale and search_type:
+            result = Item().find_by_sale_type(search_sale, search_type)
+        elif search_brand:
+            result = Item().find_by_brand(search_brand)
+        elif search_sale:
+            result = Item().find_by_sale(search_sale)
+        elif search_type:
+            result = Item().find_by_type(search_type)
+        else:
+            result = Item().find_all()
         return {"items_list": result}
     elif request.method == 'POST':
-        userToAdd = request.get_json()
-        newUser = User(userToAdd)
-        newUser.save() 
-        resp = jsonify(newUser), 201
+        itemToAdd = request.get_json()
+        newItem = Item(itemToAdd)
+        newItem.save()
+        resp = jsonify(newItem), 201
         return resp
 
-'''@app.route('/users', methods=['GET', 'POST'])
-def get_users():
-    if request.method == 'GET':
-        search_username = request.args.get('name')
-        search_job = request.args.get('job')
-        if search_username and search_job:
-            # TODO: Replace with database access
-            result = User().find_by_name_job(search_username, search_job)
-        elif search_username:
-            # using list shorthand for filtering the list.
-            # TODO: Replace with database access
-            result = User().find_by_name(search_username)
-        else:
-            result = User().find_all()
-        return {"users_list": result}
-    elif request.method == 'POST':
-        userToAdd = request.get_json() # no need to generate an id ourselves
-        newUser = User(userToAdd)
-        newUser.save() # pymongo gives the record an "_id" field automatically
-        resp = jsonify(newUser), 201
-        return resp
 
-@app.route('/users/<id>', methods=['GET', 'DELETE'])
-def get_user(id):
-    if request.method == 'GET':
-        user = User({"_id":id})
-        if user.reload() :
-            return user
-        else :
-            return jsonify({"error": "User not found"}), 404
-    elif request.method == 'DELETE':
-        user = User({"_id":id})
-        resp = user.remove()
-        if (resp.hasWriteError()):
-            return {}, resp.writeError.code
-        # TODO: Check the resp object if the removal was successful or not.
-        # Return a 404 status code if it was not successful
-        return {}, 204
+@app.route('/wishlist', methods=['POST', 'DELETE'])
+def wish_list():
+   if request.method == 'POST':
+      r = request.get_json()
+      found = WishList().find_by_name(r['name'])
+      if len(found)==0:
+         WishList().collection.insert_one({'name':r['name'], 'wishlist':[r['item']]})
+      else:
+         old_wishlist = found[0]['wishlist']
+         old_wishlist.append(r['item'])
+         WishList().collection.update_one({'name': r['name']}, {'$set':{'wishlist':old_wishlist}})
+      return jsonify(r), 201
+   elif request.method == 'DELETE':
+      new_wishlist = []
+      user_name = request.args.get('name')
+      id = request.args.get('id')
+      wishlist = WishList().find_by_name(user_name)[0]['wishlist']
+      for item in wishlist:
+         if item['_id'] != id:
+            new_wishlist.append(item)
+      WishList().collection.update_one({'name':user_name}, {'$set':{'wishlist':new_wishlist}})
+      resp = make_response(jsonify(success=True), 204)
+      return resp
 
-def find_users_by_name_job(name, job):
-    subdict = {'users_list' : []}
-    for user in users['users_list']:
-        if user['name'] == name and user['job'] == job:
-            subdict['users_list'].append(user)
-    return subdict'''
+@app.route('/wishlist/<name>', methods=['GET'])
+def get_wishlist(name):
+   found = WishList().find_by_name(name)
+   if len(found) > 0:
+      return {'wishlist':found[0]['wishlist']}
+   return {'wishlist':[]}
